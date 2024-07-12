@@ -27,7 +27,7 @@ jobs:
           run: |
             ssh root@120.26.123.78 "
               # 服务器已经执行过 git clone 到 /www/wwwroot/blog
-              cd /www/wwwroot/blog;
+              cd ../www/wwwroot/blog;
               git checkout . ;
               git checkout main;
               git pull origin main;

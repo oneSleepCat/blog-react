@@ -26,8 +26,8 @@ jobs:
         - name: deploy # 自动发布
           run: |
             ssh root@120.26.123.78 "
-              # 服务器已经执行过 git clone 到 /www/wwwroot/blog
-              cd ../www/wwwroot/blog;
+              # 服务器已经执行过 git clone 到 /www/wwwroot/blog/blog-react
+              cd ../www/wwwroot/blog/blog-react;
               git checkout . ;
               git checkout main;
               git pull origin main;

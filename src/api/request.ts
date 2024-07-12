@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /**
  * 网络请求配置
  */
@@ -36,12 +38,13 @@ axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
  */
 axios.interceptors.request.use(
   config => {
-    const token = localStorage.getItem('X-Litemall-Token');
+    // const token = localStorage.getItem('X-Litemall-Token');
     config.data = JSON.stringify(config.data);
-    config.headers = {
-      'Content-Type': 'application/json',
-      'X-Litemall-Token': token,
-    };
+    // eslint-disable-next-line
+    // config.headers = {
+    //   'Content-Type': 'application/json',
+    //   'X-Litemall-Token': token,
+    // };
     return config;
   },
   error => {
@@ -71,16 +74,16 @@ axios.interceptors.response.use(
  * @param params  请求参数
  * @returns {Promise}
  */
-export function get(url, params = {}) {
-  const flag = Object.keys(params).some(
-    key => Array.isArray(params[key]) && params[key].length > 0
-  );
+export function get(url:string, params = {}) {
+  // const flag = Object.keys(params).some(
+  //   key => Array.isArray(params[key]) && params[key].length > 0
+  // );
   let _url = url;
   let _params = params;
-  if (flag) {
-    // _url = `${url}?${paramsSerializer(params)}`;
-    _params = {};
-  }
+  // if (flag) {
+  //   // _url = `${url}?${paramsSerializer(params)}`;
+  //   _params = {};
+  // }
   return new Promise((resolve, reject) => {
     axios
       .get(_url, {
@@ -102,7 +105,7 @@ export function get(url, params = {}) {
  * @returns {Promise}
  */
 
-export function post(url, data) {
+export function post(url:string, data:object) {
   return new Promise((resolve, reject) => {
     axios.post(url, data).then(
       response => {
@@ -122,7 +125,7 @@ export function post(url, data) {
  * @param data
  * @returns {Promise}
  */
-export function patch(url, data = {}) {
+export function patch(url:string, data = {}) {
   return new Promise((resolve, reject) => {
     axios.patch(url, data).then(
       response => {
@@ -143,7 +146,7 @@ export function patch(url, data = {}) {
  * @returns {Promise}
  */
 
-export function put(url, data = {}) {
+export function put(url:string, data = {}) {
   return new Promise((resolve, reject) => {
     axios.put(url, data).then(
       response => {
@@ -158,17 +161,13 @@ export function put(url, data = {}) {
 }
 
 //统一接口处理，返回数据
-const request = function (fecth, url, param, config) {
+const request = function (fecth:string, url:string, param:object) {
   return new Promise((resolve, reject) => {
     switch (fecth) {
       case 'get':
         get(url, param)
-          .then(function (response) {
-            if (config?.isFull) {
-              resolve(response);
-            } else {
-              resolve(response?.data);
-            }
+          .then((response)=> {
+            resolve(response);
           })
           .catch(function (error) {
             console.log('get request GET failed.', error);
@@ -193,7 +192,7 @@ const request = function (fecth, url, param, config) {
 export default request;
 
 //失败提示
-function msag(err) {
+function msag(err: any) {
   if (err && err.response) {
     switch (err.response.status) {
       case 400:

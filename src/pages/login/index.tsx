@@ -1,4 +1,3 @@
-import React from 'react';
 import { getBlogList } from '@/api';
 
 export default function Login() {

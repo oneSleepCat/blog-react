@@ -1,4 +1,4 @@
-import request from './request.js';
+import request from './request';
 
 const login = async () => {
   // axios.post('');

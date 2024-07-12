@@ -21,11 +21,6 @@ jobs:
             mkdir -p ~/.ssh/
             echo "${{secrets.MY_ID_RSA}}" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
-            ls -l /home/runner/.ssh/id_rsa
-            chmod 600 /home/runner/.ssh/id_rsa
-            ls -ld /home/runner/.ssh
-            sudo chown runner: /home/runner/.ssh
-            sudo chown runner: /home/runner/.ssh/id_rsa
             ssh-keyscan 120.26.123.78 >> ~/.ssh/known_hosts
 
         - name: deploy # 自动发布
